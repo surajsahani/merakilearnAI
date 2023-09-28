@@ -7,6 +7,7 @@ import com.androidhacks.merakiliteai.local.AppDatabase
 import com.androidhacks.merakiliteai.local.PathwayEntity
 import com.androidhacks.merakiliteai.models.PathwayContainer
 import com.androidhacks.merakiliteai.network.ApiServices
+import com.androidhacks.merakiliteai.utils
 
 
 class HomeRepo(
@@ -23,9 +24,13 @@ class HomeRepo(
 
     suspend fun getPathways() {
         try {
-            val pathways = apiServices.getPathways()
-            database.pathwayDao().insertPathway(pathways.pathways)
-            pathwayList.postValue(pathways)
+            if (utils.isInternetAvailable(context)==true) {
+                val pathways = apiServices.getPathways()
+                database.pathwayDao().insertPathway(pathways.pathways)
+                pathwayList.postValue(pathways)
+            } else {
+                getPathwaysFromDb()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }

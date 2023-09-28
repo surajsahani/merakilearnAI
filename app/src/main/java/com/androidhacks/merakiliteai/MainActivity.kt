@@ -3,11 +3,11 @@ package com.androidhacks.merakiliteai
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androidhacks.merakiliteai.adapter.PathwayAdapter
 import com.androidhacks.merakiliteai.databinding.ActivityMainBinding
@@ -23,6 +23,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+
+        binding.searchBoxContainer.root.setOnClickListener {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+            }
+            startActivityForResult(intent, SPEECH_REQUEST_CODE)
+        }
 
         val repository = (application as AppApplication).repo
         viewModel = ViewModelProvider(this, HomeViewModelFactory(repository)).get(HomeViewModel::class.java)
@@ -49,5 +59,8 @@ class MainActivity : AppCompatActivity() {
         binding.pathwayRecycler.adapter = adapter
     }
 
+    companion object {
+        const val SPEECH_REQUEST_CODE = 0
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.androidhacks.merakiliteai.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.androidhacks.merakiliteai.models.CourseContainer
@@ -11,12 +12,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel (private val repo: HomeRepo) : ViewModel() {
-    init {
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    init {
+        loadData()
+    }
+    private fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
-            repo.getPathways()
-//            repo.getCourses()
-//            repo.getCoursesExercise()
+            try {
+                _isLoading.postValue(true)
+                repo.getPathways()
+                _isLoading.postValue(false)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _isLoading.postValue(false)
+            }
         }
     }
 

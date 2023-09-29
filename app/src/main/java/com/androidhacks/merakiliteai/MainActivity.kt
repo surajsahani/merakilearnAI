@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+        binding.animationView.setAnimation(R.raw.meraki)
+
 
         binding.searchBoxContainer.root.setOnClickListener {
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
@@ -36,6 +39,16 @@ class MainActivity : AppCompatActivity() {
 
         val repository = (application as AppApplication).repo
         viewModel = ViewModelProvider(this, HomeViewModelFactory(repository)).get(HomeViewModel::class.java)
+
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.animationView.visibility = View.VISIBLE
+                binding.animationView.playAnimation()
+            } else {
+                binding.animationView.visibility = View.GONE
+                binding.animationView.cancelAnimation()
+            }
+        }
 
         viewModel.pathwayContainer.observe(this) {
             initPathwayRecyclerView(it.pathways)

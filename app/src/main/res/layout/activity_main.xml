@@ -12,6 +12,19 @@
             android:id="@+id/search_box_container"
             layout="@layout/search_header_layout" />
 
+        <TextView
+            android:id="@+id/no_search_results_found_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="no_search_results_found"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            android:visibility="invisible"
+            android:textColor="#F10B0B"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pathwayRecycler"
             android:layout_width="match_parent"

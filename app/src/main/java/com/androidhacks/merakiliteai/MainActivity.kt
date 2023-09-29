@@ -1,7 +1,9 @@
 package com.androidhacks.merakiliteai
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -22,6 +24,16 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
 
+        binding.searchBoxContainer.root.setOnClickListener {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+            }
+            startActivityForResult(intent, SPEECH_REQUEST_CODE)
+        }
+
         val repository = (application as AppApplication).repo
         viewModel = ViewModelProvider(this, HomeViewModelFactory(repository)).get(HomeViewModel::class.java)
 
@@ -30,18 +42,27 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "onCreate: ${it.pathways}")
         }
 
+
     }
 
     fun initPathwayRecyclerView(pathway: List<PathwayEntity>) {
+    private fun initPathwayRecyclerView(pathway: List<Pathway>) {
         val layoutManager = LinearLayoutManager(this)
         binding.pathwayRecycler.layoutManager = layoutManager
 
         val adapter = PathwayAdapter(pathway) {
+            viewModel.getCourse()
+            viewModel.getCourseExercise()
             Toast.makeText(this, "CLicked on ${it.name}", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CourseActivity::class.java)
+            startActivity(intent)
         }
 
         binding.pathwayRecycler.adapter = adapter
     }
 
+    companion object {
+        const val SPEECH_REQUEST_CODE = 0
+    }
 
 }

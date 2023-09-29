@@ -24,22 +24,21 @@ class HomeRepo(
     private val courseList = MutableLiveData<List<Course>>()
     private val courseContentExercise = MutableLiveData<CourseExerciseContainer>()
 
-    val pathways : LiveData<PathwayContainer> = pathwayList
-    val courses : LiveData<List<Course>> = courseList
-    val courseExerciseContainer : LiveData<CourseExerciseContainer> = courseContentExercise
+    val pathways: LiveData<PathwayContainer> = pathwayList
+    val courses: LiveData<List<Course>> = courseList
+    val courseExerciseContainer: LiveData<CourseExerciseContainer> = courseContentExercise
 
 
     suspend fun getPathways() {
         try {
-          val pathways = apiServices.getPathways()
-            pathwayList.postValue(pathways)
             Log.d("HomeRepo", "getPathways: ${pathways}")
-            if (utils.isInternetAvailable(context)==true) {
+            if (utils.isInternetAvailable(context) == true) {
                 val pathways = apiServices.getPathways()
                 database.pathwayDao().insertPathway(pathways.pathways)
                 pathwayList.postValue(pathways)
             } else {
                 pathwayList.postValue(PathwayContainer(getPathwaysFromDb()))
+                Log.d("HomeRepo", "getPathways: ${getPathwaysFromDb()}")
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -47,39 +46,28 @@ class HomeRepo(
 
     }
 
-    suspend fun getCourses(){
+    suspend fun getCourses() {
         try {
             val courses = apiServices.getPathways().pathways[1].courses
             courseList.postValue(courses)
             Log.d("HomeRepo", "getCourses: ${courses}")
         } catch (e: Exception) {
             Log.d("HomeRepo", "getCourses: ${e.message}")
-    suspend fun getPathwaysFromDb() : List<PathwayEntity> {
-        return database.pathwayDao().getAllPathways()
-        suspend fun getCourses() {
-            try {
-                val courses = apiServices.getCourseById(1, "json")
-                courseList.postValue(courses)
-            } catch (e: Exception) {
-                Log.d("HomeRepo", "getCourses: ${e.message}")
-            }
         }
+    }
 
-    suspend fun getCoursesExercise(){
+    suspend fun getPathwaysFromDb(): List<PathwayEntity> {
+        return database.pathwayDao().getAllPathways()
+    }
+
+    suspend fun getCoursesExercise() {
         try {
-            val coursesExercise = apiServices.getCourseContentAsync(87,"en")
+            val coursesExercise = apiServices.getCourseContentAsync(87, "en")
             courseContentExercise.postValue(coursesExercise)
             Log.d("HomeRepo", "getExercise: ${coursesExercise}")
 
         } catch (e: Exception) {
             Log.d("HomeRepo", "getExercise Error: ${e.message}")
-        suspend fun getCoursesExercise() {
-            try {
-                val coursesExercise = apiServices.getCourseContentAsync(87, "en")
-                courseContentExercise.postValue(coursesExercise)
-            } catch (e: Exception) {
-                Log.d("HomeRepo", "getCourses: ${e.message}")
-            }
         }
     }
 }

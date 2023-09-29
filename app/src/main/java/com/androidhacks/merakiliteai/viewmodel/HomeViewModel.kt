@@ -23,7 +23,7 @@ class HomeViewModel (private val repo: HomeRepo) : ViewModel() {
 
     fun getCourse(){
         viewModelScope.launch(Dispatchers.IO) {
-            //repo.getCourses()
+            repo.getCourses()
         }
     }
 

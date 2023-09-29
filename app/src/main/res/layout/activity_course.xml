@@ -6,20 +6,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".hjkkkiukjMainActivity">
-
-        <include
-            android:id="@+id/search_box_container"
-            layout="@layout/search_header_layout" />
+        tools:context=".CourseActivity">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pathwayRecycler"
+            android:id="@+id/courseRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_margin="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_box_container"
-      />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:listitem="@layout/item_course"
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

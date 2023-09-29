@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="9dp"
+        app:cardCornerRadius="5dp"
+        android:padding="5dp"
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
+            android:padding="2dp"
+            android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/course_logo"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="4dp"
                 android:src="@drawable/ic_launcher_background"/>
 
             <TextView
                 android:id="@+id/course_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="title "
+                tools:text="Title"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/course_logo"
-                android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
                 />
             <TextView
                 android:id="@+id/description_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="desciption"
-                android:layout_marginStart="10dp"
+                tools:text="description"
+                android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/course_logo"
                 android:layout_below="@+id/course_name"/>
         </RelativeLayout>

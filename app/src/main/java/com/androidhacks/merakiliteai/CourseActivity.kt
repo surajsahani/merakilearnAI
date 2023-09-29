@@ -1,6 +1,7 @@
 package com.androidhacks.merakiliteai
 
 import android.content.Intent
+import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,26 +29,24 @@ class CourseActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, HomeViewModelFactory(repository)).get(HomeViewModel::class.java)
 
 
+        val selectedPathwayId = intent.getIntExtra("selectedPathwayIndex", 0)
+
+
         viewModel.courseContainer.observe(this) {
-            Log.d("CourseActivity", "onCreate: ${it.courses}")
-            initCourseRecyclerView(it.courses)
+            Log.d("CourseActivity", "onCreate: ${it}")
+            initCourseRecyclerView(it)
 
-        }
-
-        viewModel.courseContainerExercise.observe(this) {
-            Log.d("CourseContent", "onCreate: ${it.course}")
-            //initCourseRecyclerView(it.course)
         }
     }
 
     private fun initCourseRecyclerView(courses : List<Course>){
-        val layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.courseRecycler.layoutManager = layoutManager
 
         val adapter = CourseAdapter(courses) {
             viewModel.getCourseExercise()
             Toast.makeText(this, "CLicked on ${it.name}", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, CourseActivity::class.java)
+            val intent = Intent(this, ExerciseActivity::class.java)
             startActivity(intent)
         }
 

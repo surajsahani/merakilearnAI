@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.androidhacks.merakiliteai.models.Course
 import com.androidhacks.merakiliteai.local.AppDatabase
 import com.androidhacks.merakiliteai.local.PathwayEntity
 import com.androidhacks.merakiliteai.models.CourseContainer
@@ -20,11 +21,11 @@ class HomeRepo(
 ) {
 
     private val pathwayList = MutableLiveData<PathwayContainer>()
-    private val courseList = MutableLiveData<CourseContainer>()
+    private val courseList = MutableLiveData<List<Course>>()
     private val courseContentExercise = MutableLiveData<CourseExerciseContainer>()
 
     val pathways : LiveData<PathwayContainer> = pathwayList
-    val courses : LiveData<CourseContainer> = courseList
+    val courses : LiveData<List<Course>> = courseList
     val courseExerciseContainer : LiveData<CourseExerciseContainer> = courseContentExercise
 
 
@@ -43,24 +44,26 @@ class HomeRepo(
 
     }
 
+    suspend fun getCourses(){
+        try {
+            val courses = apiServices.getPathways().pathways[1].courses
+            courseList.postValue(courses)
+            Log.d("HomeRepo", "getCourses: ${courses}")
+        } catch (e: Exception) {
+            Log.d("HomeRepo", "getCourses: ${e.message}")
+        }}
     suspend fun getPathwaysFromDb() : List<PathwayEntity> {
         return database.pathwayDao().getAllPathways()
-        suspend fun getCourses() {
-            try {
-                val courses = apiServices.getCourseById(1, "json")
-                courseList.postValue(courses)
-            } catch (e: Exception) {
-                Log.d("HomeRepo", "getCourses: ${e.message}")
-            }
-        }
+       }
+    
+    suspend fun getCoursesExercise(){
+        try {
+            val coursesExercise = apiServices.getCourseContentAsync(87,"en")
+            courseContentExercise.postValue(coursesExercise)
+            Log.d("HomeRepo", "getExercise: ${coursesExercise}")
 
-        suspend fun getCoursesExercise() {
-            try {
-                val coursesExercise = apiServices.getCourseContentAsync(87, "en")
-                courseContentExercise.postValue(coursesExercise)
-            } catch (e: Exception) {
-                Log.d("HomeRepo", "getCourses: ${e.message}")
-            }
+        } catch (e: Exception) {
+            Log.d("HomeRepo", "getExercise Error: ${e.message}")
         }
     }
 }

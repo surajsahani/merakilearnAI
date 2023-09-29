@@ -29,7 +29,7 @@ class HomeViewModel (private val repo: HomeRepo) : ViewModel() {
 
     fun getCourseExercise(){
         viewModelScope.launch(Dispatchers.IO) {
-            //repo.getCoursesExercise()
+            repo.getCoursesExercise()
         }
     }
     val pathwayContainer : LiveData<PathwayContainer> = repo.pathways

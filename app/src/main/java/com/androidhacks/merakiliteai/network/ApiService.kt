@@ -1,8 +1,8 @@
 package com.androidhacks.merakiliteai.network
 
 import com.androidhacks.merakiliteai.models.CourseContainer
-import com.androidhacks.merakiliteai.models.PathwayContainer
 import com.androidhacks.merakiliteai.models.CourseExerciseContainer
+import com.androidhacks.merakiliteai.models.PathwayContainer
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

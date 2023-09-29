@@ -3,6 +3,7 @@ package com.androidhacks.merakiliteai.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.androidhacks.merakiliteai.models.Course
 import com.androidhacks.merakiliteai.models.CourseContainer
 import com.androidhacks.merakiliteai.models.CourseExerciseContainer
 import com.androidhacks.merakiliteai.models.PathwayContainer
@@ -33,7 +34,7 @@ class HomeViewModel (private val repo: HomeRepo) : ViewModel() {
     }
     val pathwayContainer : LiveData<PathwayContainer> = repo.pathways
 
-    val courseContainer : LiveData<CourseContainer> = repo.courses
+    val courseContainer : LiveData<List<Course>> = repo.courses
 
     val courseContainerExercise : LiveData<CourseExerciseContainer> = repo.courseExerciseContainer
 

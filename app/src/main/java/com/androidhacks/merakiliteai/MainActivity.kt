@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initPathwayRecyclerView(pathway: List<PathwayEntity>) {
-    private fun initPathwayRecyclerView(pathway: List<Pathway>) {
         val layoutManager = LinearLayoutManager(this)
         binding.pathwayRecycler.layoutManager = layoutManager
 

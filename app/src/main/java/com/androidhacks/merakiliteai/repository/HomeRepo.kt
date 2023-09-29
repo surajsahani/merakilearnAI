@@ -45,22 +45,22 @@ class HomeRepo(
 
     suspend fun getPathwaysFromDb() : List<PathwayEntity> {
         return database.pathwayDao().getAllPathways()
-    suspend fun getCourses(){
-        try {
-            val courses = apiServices.getCourseById(1,"json")
-            courseList.postValue(courses)
-        } catch (e: Exception) {
-            Log.d("HomeRepo", "getCourses: ${e.message}")
+        suspend fun getCourses() {
+            try {
+                val courses = apiServices.getCourseById(1, "json")
+                courseList.postValue(courses)
+            } catch (e: Exception) {
+                Log.d("HomeRepo", "getCourses: ${e.message}")
+            }
+        }
+
+        suspend fun getCoursesExercise() {
+            try {
+                val coursesExercise = apiServices.getCourseContentAsync(87, "en")
+                courseContentExercise.postValue(coursesExercise)
+            } catch (e: Exception) {
+                Log.d("HomeRepo", "getCourses: ${e.message}")
+            }
         }
     }
-
-    suspend fun getCoursesExercise(){
-        try {
-            val coursesExercise = apiServices.getCourseContentAsync(87,"en")
-            courseContentExercise.postValue(coursesExercise)
-        } catch (e: Exception) {
-            Log.d("HomeRepo", "getCourses: ${e.message}")
-        }
-    }
-
 }

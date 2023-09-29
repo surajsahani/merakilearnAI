@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PathwayAdapter(pathway) {
             viewModel.getCourse()
+            viewModel.getCourseExercise()
             Toast.makeText(this, "CLicked on ${it.name}", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, CourseActivity::class.java)
             startActivity(intent)

@@ -33,6 +33,11 @@ class CourseActivity : AppCompatActivity() {
             initCourseRecyclerView(it.courses)
 
         }
+
+        viewModel.courseContainerExercise.observe(this) {
+            Log.d("CourseContent", "onCreate: ${it.course}")
+            //initCourseRecyclerView(it.course)
+        }
     }
 
     private fun initCourseRecyclerView(courses : List<Course>){
@@ -40,6 +45,7 @@ class CourseActivity : AppCompatActivity() {
         binding.courseRecycler.layoutManager = layoutManager
 
         val adapter = CourseAdapter(courses) {
+            viewModel.getCourseExercise()
             Toast.makeText(this, "CLicked on ${it.name}", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, CourseActivity::class.java)
             startActivity(intent)

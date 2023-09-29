@@ -47,14 +47,6 @@ fun sportsList(context: Context): List<CourseData> {
         ),
         CourseData(
             R.drawable.img,
-            context.getString(R.string.Introduction),
-        ),
-        CourseData(
-            R.drawable.img,
-            context.getString(R.string.variable),
-        ),
-        CourseData(
-            R.drawable.img,
             context.getString(R.string.es),
         ),
         CourseData(
@@ -80,10 +72,6 @@ fun sportsList(context: Context): List<CourseData> {
         CourseData(
             R.drawable.img,
             context.getString(R.string.k),
-        ),
-        CourseData(
-            R.drawable.img,
-            context.getString(R.string.Introduction),
         ),
         CourseData(
             R.drawable.img,

@@ -19,7 +19,7 @@
             android:text="no_search_results_found"
             android:textAppearance="?attr/textAppearanceHeadline4"
             android:visibility="invisible"
-            android:textColor="#F10B0B"
+            android:textColor="#EF0808"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

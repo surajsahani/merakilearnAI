@@ -16,20 +16,20 @@ class HomeViewModel (private val repo: HomeRepo) : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             repo.getPathways()
-            repo.getCourses()
-            repo.getCoursesExercise()
+//            repo.getCourses()
+//            repo.getCoursesExercise()
         }
     }
 
     fun getCourse(){
         viewModelScope.launch(Dispatchers.IO) {
-            repo.getCourses()
+            //repo.getCourses()
         }
     }
 
     fun getCourseExercise(){
         viewModelScope.launch(Dispatchers.IO) {
-            repo.getCoursesExercise()
+            //repo.getCoursesExercise()
         }
     }
     val pathwayContainer : LiveData<PathwayContainer> = repo.pathways

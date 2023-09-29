@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androidhacks.merakiliteai.adapter.PathwayAdapter
 import com.androidhacks.merakiliteai.databinding.ActivityMainBinding
-import com.androidhacks.merakiliteai.models.Pathway
+import com.androidhacks.merakiliteai.local.PathwayEntity
 import com.androidhacks.merakiliteai.viewmodel.HomeViewModel
 import com.androidhacks.merakiliteai.viewmodel.HomeViewModelFactory
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initPathwayRecyclerView(pathway: List<Pathway>) {
+    fun initPathwayRecyclerView(pathway: List<PathwayEntity>) {
         val layoutManager = LinearLayoutManager(this)
         binding.pathwayRecycler.layoutManager = layoutManager
 

@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">merakiliteAI</string>
+    <string name="Introduction">Introduction To Python</string>
+    <string name="variable">Variable</string>
+    <string name="datatypes">Data types</string>
+    <string name="operator">Operators</string>
+    <string name="ifelse">If else</string>
+    <string name="loop">Loop</string>
+    <string name="list">List</string>
+    <string name="function">Function</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="no_search_results_found">No Results Found</string>
+    <string name="ion">Introduction To Residential Program</string>
+    <string name="ve">Introduction</string>
+    <string name="es">English</string>
+    <string name="r">Javascript</string>
+    <string name="se">Spoken English</string>
+    <string name="k">Js Variables</string>
+    <string name="i">Js Loop</string>
+    <string name="ad">Js Function</string>
+    <string name="w">Array</string>
+    <string name="y">Objects</string>
+    <string name="e">Js List</string>
+    <string name="dc">Programme</string>
+    <string name="b">Js Operators</string>
+    <string name="a">Js If else</string>
+    <string name="c4ca">C4CA</string>
 </resources>

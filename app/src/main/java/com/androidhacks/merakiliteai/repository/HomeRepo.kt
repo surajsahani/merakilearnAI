@@ -22,6 +22,7 @@ class HomeRepo(
 
     private val pathwayList = MutableLiveData<PathwayContainer>()
     private val courseList = MutableLiveData<List<Course>>()
+
     private val courseContentExercise = MutableLiveData<CourseExerciseContainer>()
 
     val pathways: LiveData<PathwayContainer> = pathwayList

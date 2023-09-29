@@ -1,5 +1,6 @@
 package com.androidhacks.merakiliteai.network
 
+import com.androidhacks.merakiliteai.models.Course
 import com.androidhacks.merakiliteai.models.CourseContainer
 import com.androidhacks.merakiliteai.models.CourseExerciseContainer
 import com.androidhacks.merakiliteai.models.PathwayContainer

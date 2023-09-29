@@ -30,7 +30,7 @@ class CourseActivity : AppCompatActivity() {
 
         viewModel.courseContainer.observe(this) {
             Log.d("CourseActivity", "onCreate: ${it.courses}")
-            initCourseRecyclerView(it.courses)
+            it.courses?.let { it1 -> initCourseRecyclerView(it1) }
 
         }
 

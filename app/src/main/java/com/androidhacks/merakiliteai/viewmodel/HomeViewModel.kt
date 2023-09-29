@@ -18,7 +18,9 @@ class HomeViewModel (private val repo: HomeRepo) : ViewModel() {
 
     init {
         loadData()
+        getCourse()
     }
+
     private fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -32,9 +34,10 @@ class HomeViewModel (private val repo: HomeRepo) : ViewModel() {
         }
     }
 
+
     fun getCourse(){
         viewModelScope.launch(Dispatchers.IO) {
-            //repo.getCourses()
+            repo.getCourses()
         }
     }
 

@@ -4,13 +4,20 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.androidhacks.merakiliteai.local.AppDatabase
+import com.androidhacks.merakiliteai.local.PathwayEntity
 import com.androidhacks.merakiliteai.models.CourseContainer
 import com.androidhacks.merakiliteai.models.CourseExerciseContainer
 import com.androidhacks.merakiliteai.models.PathwayContainer
 import com.androidhacks.merakiliteai.network.ApiServices
+import com.androidhacks.merakiliteai.utils
 
 
-class HomeRepo(private val apiServices: ApiServices, private val context: Context) {
+class HomeRepo(
+    private val apiServices: ApiServices,
+    private val context: Context,
+    private val database: AppDatabase,
+) {
 
     private val pathwayList = MutableLiveData<PathwayContainer>()
     private val courseList = MutableLiveData<CourseContainer>()
@@ -23,14 +30,21 @@ class HomeRepo(private val apiServices: ApiServices, private val context: Contex
 
     suspend fun getPathways() {
         try {
-            val pathways = apiServices.getPathways()
-            pathwayList.postValue(pathways)
+            if (utils.isInternetAvailable(context)==true) {
+                val pathways = apiServices.getPathways()
+                database.pathwayDao().insertPathway(pathways.pathways)
+                pathwayList.postValue(pathways)
+            } else {
+                pathwayList.postValue(PathwayContainer(getPathwaysFromDb()))
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
     }
 
+    suspend fun getPathwaysFromDb() : List<PathwayEntity> {
+        return database.pathwayDao().getAllPathways()
     suspend fun getCourses(){
         try {
             val courses = apiServices.getCourseById(1,"json")

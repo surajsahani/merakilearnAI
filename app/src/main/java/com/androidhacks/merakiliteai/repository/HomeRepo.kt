@@ -29,7 +29,7 @@ class HomeRepo(
                 database.pathwayDao().insertPathway(pathways.pathways)
                 pathwayList.postValue(pathways)
             } else {
-                getPathwaysFromDb()
+                pathwayList.postValue(PathwayContainer(getPathwaysFromDb()))
             }
         } catch (e: Exception) {
             e.printStackTrace()
